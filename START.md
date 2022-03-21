@@ -1,6 +1,6 @@
 # 启动
 
-```
+```js
 npm i docsify-cli -g
 
 docsify init projectName
