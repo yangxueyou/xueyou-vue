@@ -6,40 +6,51 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+    }
+
+    li {
+      flex: 1;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .active {
+      background: rgb(201, 196, 196)
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 
 <body>
   <div id="app">
-    <!-- v-model 双向绑定了一个输入框的value -->
-    <input type="text" v-model="mytext" />
-    <button @click="handleAdd">添加</button>
-    {{mytext}}
-
-    <ul v-show="list.length">
-      <li v-for="(item, index) in list">
+    <ul>
+      <li v-for="(item,index) in list" :class=" current===index ? 'active' : '' " @click="handleClick(index)">
         {{item}}
-        <button @click="handleDel(index)">删除</button>
       </li>
     </ul>
-
-    <div v-show="!list.length">请添加</div>
   </div>
   <script>
 
     const Instance = new Vue({
       el: "#app",
       data: {
-        list: [1, 2, 3],
-        mytext: ''
+        list: ['首页', '列表', '详情'],
+        current: 0
       },
       methods: {
-        handleAdd() {
-          this.list.push(this.mytext)
-          this.mytext = ''
-        },
-        handleDel(index) {
-          this.list.splice(index, 1)
+        handleClick(index) {
+          this.current = index
         }
       }
     }) 
